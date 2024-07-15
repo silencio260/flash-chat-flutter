@@ -10,7 +10,29 @@ dependencies:
   flutter:
     sdk: flutter
 
+  animated_text_kit: ^1.3.0
+  firebase_core: ^0.4.4
+  firebase_auth: ^0.16.1
+  cloud_firestore: ^0.13.7
   cupertino_icons: ^0.1.2
+  modal_progress_hud: ^0.1.3
+
+  http: ^0.12.0+4
+  cached_network_image: ^2.0.0
+  webview_flutter: ^0.3.19+9
+
+  store_checker: ^1.2.0
+
+  image_picker: ^0.6.3+1              # Used to upload images
+  image_gallery_saver: ^1.2.2         # Used to output images
+  esys_flutter_share: ^1.0.2          # Used to share images
+  image:                              # Used for image manipulation
+  permission_handler: ^4.2.0+hotfix.3 # Used to handle permissions
+  encrypt: ^4.0.0                     # Used to do AES encryption
+  provider: ^4.0.4                    # Used to provide services
+  flutter_steganography: ^0.0.1
+
+
 
 dev_dependencies:
   flutter_test:

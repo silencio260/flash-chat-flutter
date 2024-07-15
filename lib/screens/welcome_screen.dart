@@ -1,11 +1,58 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:flash_chat/components/roundedButtton.dart';
+import 'login_screen.dart';
+import 'registration_screen.dart';
+import 'package:flash_chat/piracy_checker.dart';
 
 class WelcomeScreen extends StatefulWidget {
+  static String id = 'welcome_screen';
+
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
+class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProviderStateMixin {
+  AnimationController controller;
+  Animation animation;
+  bool isPirated;
+  String downloadSource;
+
+  @override
+  void initState() {
+    initPiracy();
+    super.initState();
+    controller = AnimationController(
+      duration: Duration(seconds: 1),
+      vsync: this,
+    );
+
+    animation = ColorTween(begin: Colors.red, end: Colors.blue).animate(controller);
+
+    controller.addListener(() {
+      setState(() {
+//        print(animation.value);
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  void initPiracy() async {
+//    bool p = await PiracyChecker();
+    setState(() async {
+      if (!kDebugMode) {
+        isPirated = await PiracyChecker();
+        downloadSource = source;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,14 +65,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           children: <Widget>[
             Row(
               children: <Widget>[
-                Container(
-                  child: Image.asset('images/logo.png'),
-                  height: 60.0,
+                Hero(
+                  tag: 'logo',
+                  child: Container(
+                    child: Image.asset('images/logo.png'),
+                    height: 80.0,
+                  ),
                 ),
-                Text(
-                  'Flash Chat',
-                  style: TextStyle(
-                    fontSize: 45.0,
+                TyperAnimatedTextKit(
+                  text: ['Flash News'],
+                  textStyle: TextStyle(
+                    fontSize: 40.0,
                     fontWeight: FontWeight.w900,
                   ),
                 ),
@@ -34,42 +84,33 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             SizedBox(
               height: 48.0,
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 16.0),
-              child: Material(
-                elevation: 5.0,
-                color: Colors.lightBlueAccent,
-                borderRadius: BorderRadius.circular(30.0),
-                child: MaterialButton(
-                  onPressed: () {
-                    //Go to login screen.
-                  },
-                  minWidth: 200.0,
-                  height: 42.0,
-                  child: Text(
-                    'Log In',
-                  ),
-                ),
-              ),
+            RoundedButton(
+              title: 'Log In',
+              colour: Colors.lightBlueAccent,
+              onPressed: isPirated == true
+                  ? null
+                  : () {
+                      Navigator.pushNamed(context, LoginScreen.id);
+                    },
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 16.0),
-              child: Material(
-                color: Colors.blueAccent,
-                borderRadius: BorderRadius.circular(30.0),
-                elevation: 5.0,
-                child: MaterialButton(
-                  onPressed: () {
-                    //Go to registration screen.
-                  },
-                  minWidth: 200.0,
-                  height: 42.0,
-                  child: Text(
-                    'Register',
-                  ),
-                ),
-              ),
+            RoundedButton(
+              title: 'Register',
+              colour: Colors.blueAccent,
+              onPressed: isPirated == true
+                  ? null
+                  : () {
+                      Navigator.pushNamed(context, RegistrationScreen.id);
+                    },
             ),
+            Container(
+                child: isPirated == true
+                    ? Text(
+                        " $downloadSource! This App Was Pirated Please Download From The APPStore of PlayStore",
+                        style: TextStyle(color: Colors.red))
+                    : Text(
+                        "This App Was downloaded From PlayStore",
+                        style: TextStyle(color: Colors.green),
+                      )),
           ],
         ),
       ),

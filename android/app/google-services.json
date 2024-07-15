@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "470367993302",
+    "firebase_url": "https://flash-chat-flutter-371de.firebaseio.com",
+    "project_id": "flash-chat-flutter-371de",
+    "storage_bucket": "flash-chat-flutter-371de.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:470367993302:android:ec789eb3f4010e3a4bb877",
+        "android_client_info": {
+          "package_name": "co.faruq.flash_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "470367993302-hcvi3kurdbruo2d4mo5heusi08rbqfhj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBR0DFWBsvY91_ImsZrKIklQBEwoV6W8nU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "470367993302-hcvi3kurdbruo2d4mo5heusi08rbqfhj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
